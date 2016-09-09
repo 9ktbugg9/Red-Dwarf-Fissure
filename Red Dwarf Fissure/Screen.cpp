@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "Screen.h"
 
-bool Screen::init() {
+bool Screen::init(string WINDOW_NAME) {
 	bool success = true;
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
 		cout << "-Initialization Failed- Reason: " << SDL_GetError() << endl;
 		success = false;
 	}
 	else {
-		gWindow = SDL_CreateWindow(WINDOW_NAME, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		gWindow = SDL_CreateWindow(WINDOW_NAME.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (gWindow == NULL) {
 			cout << "-Window Creation Failed- Reason: " << SDL_GetError() << endl;
 			success = false;

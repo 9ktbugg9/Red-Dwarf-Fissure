@@ -13,7 +13,7 @@ public:
 
 	void update(int, int);
 
-	Camera(int w, int h, int s) : LEVEL_WIDTH(w), LEVEL_HEIGHT(h), playerScale(32 * (s / 2)) {}
+	Camera(int w, int h, int s = 0) : LEVEL_WIDTH(w), LEVEL_HEIGHT(h), playerScale(32 * (s / 2)) {}
 	~Camera();
 };
 

@@ -8,7 +8,6 @@ private:
 
 
 public:
-	//Mix_Chunk *bork = NULL;
 	//Mix_Chunk *sound = NULL;
 
 	AudioMngr();

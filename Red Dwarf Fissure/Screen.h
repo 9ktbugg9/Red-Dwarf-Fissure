@@ -8,12 +8,10 @@
 
 using namespace std;
 
-#define WINDOW_NAME "Red Dwarf Fissure"
-
 class Screen {
 private://SCREEN_WIDTH / 16 * 9;
 	void close();
-	bool init();
+	bool init(string);
 	bool loadMedia();
 
 public:
@@ -29,7 +27,7 @@ public:
 	int getHeight() { return SCREEN_HEIGHT; }
 
 
-	Screen() { init();}
+	Screen(string winName) { init(winName);}
 	~Screen() { close(); }
 };
 

@@ -7,9 +7,7 @@ private:
 	SDL_Renderer *mRenderer;
 
 public:
-	CTexture charSheet;
-	SDL_Rect buggClips[4][3][3];
-	CTexture background;
+	//CTecture clips;
 
 
 	SpriteMngr(SDL_Renderer *);
