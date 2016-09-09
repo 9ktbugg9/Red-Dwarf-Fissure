@@ -71,12 +71,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2-2.0.4\include;C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2_image-2.0.1\include;C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2_mixer-2.0.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2-2.0.4\lib\x86;C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2_image-2.0.1\lib\x86;C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2_mixer-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2-2.0.4\include;C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2_image-2.0.1\include;C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2_mixer-2.0.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2-2.0.4\lib\x86;C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2_image-2.0.1\lib\x86;C:\Users\Owner\Desktop\Tools\Coding\Visual Studio\Red Dwarf Fissure\Red Dwarf Fissure\SDL2_mixer-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -92,6 +96,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,6 +127,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,11 +151,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioMngr.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CTexture.h" />
+    <ClInclude Include="GlobalVars.h" />
+    <ClInclude Include="Screen.h" />
+    <ClInclude Include="SpriteMngr.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioMngr.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="Red Dwarf Fissure.cpp" />
+    <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="SpriteMngr.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
