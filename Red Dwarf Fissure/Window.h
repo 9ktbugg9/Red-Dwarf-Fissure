@@ -8,26 +8,25 @@
 
 using namespace std;
 
-class Screen {
-private://SCREEN_WIDTH / 16 * 9;
+class Window {
+private:
 	void close();
 	bool init(string);
-	bool loadMedia();
 
 public:
 
 	SDL_Texture* loadTexture(string path);
 
-	SDL_Window* gWindow = NULL;
-	SDL_Renderer* gRenderer = NULL;
-	SDL_Texture* gTexture = NULL;
-	SDL_Texture* gCurrentTexture = NULL;
+	SDL_Window* _window = NULL;
+	SDL_Renderer* _renderer = NULL;
+
+	bool pEvents();
 
 	int getWidth() { return SCREEN_WIDTH; }
 	int getHeight() { return SCREEN_HEIGHT; }
 
 
-	Screen(string winName) { init(winName);}
-	~Screen() { close(); }
+	Window(string winName) { init(winName);}
+	~Window() { close(); }
 };
 

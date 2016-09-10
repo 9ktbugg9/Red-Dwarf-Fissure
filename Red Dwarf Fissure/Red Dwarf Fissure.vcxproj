@@ -155,7 +155,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="GlobalVars.h" />
-    <ClInclude Include="Screen.h" />
+    <ClInclude Include="Window.h" />
     <ClInclude Include="SpriteMngr.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -165,7 +165,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="Red Dwarf Fissure.cpp" />
-    <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="SpriteMngr.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
