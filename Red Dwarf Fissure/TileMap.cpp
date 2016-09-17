@@ -39,7 +39,7 @@ bool TileMap::setTiles(SpriteMngr *sprMngr) {
 
 		Uint32 * colors = nullptr;
 		colors = (Uint32 *)pixel;
-		std::cout << i / sprMngr->startingMap.getHeight() << " - " << i % sprMngr->startingMap.getWidth() << " - " << Uint32(colors) << std::endl;
+		//std::cout << i / sprMngr->startingMap.getHeight() << " - " << i % sprMngr->startingMap.getWidth() << " - " << Uint32(colors) << std::endl;
 		pixelColors.push_back(colors);
 	}
 
@@ -57,29 +57,100 @@ bool TileMap::setTiles(SpriteMngr *sprMngr) {
 		//std::cout << int(pixelColors[i]) << std::endl;
 		switch (Uint32(pixelColors[i])) {
 			case 0x00000000:
-				tileType = sprMngr->FLOOR;
+				switch (rand() % 4) {
+					case 0:
+						tileType = sprMngr->FLOOR1;
+						break;
+					case 1:
+						tileType = sprMngr->FLOOR2;
+						break;
+					case 2:
+						tileType = sprMngr->FLOOR3;
+						break;
+					case 3:
+						tileType = sprMngr->FLOOR4;
+						break;
+				}
 				break;
+
 			case 0x0000FF00:
-				tileType = sprMngr->GOOPY;
+				switch (rand() % 4) {
+					case 0:
+						tileType = sprMngr->GOOPY1;
+						break;
+					case 1:
+						tileType = sprMngr->GOOPY2;
+						break;
+					case 2:
+						tileType = sprMngr->GOOPY3;
+						break;
+					case 3:
+						tileType = sprMngr->GOOPY4;
+						break;
+				}
 				break;
+
 			case 0x00FF0000:
-				tileType = sprMngr->BLOOD;
+				switch (rand() % 4) {
+					case 0:
+						tileType = sprMngr->BLOOD1;
+						break;
+					case 1:
+						tileType = sprMngr->BLOOD2;
+						break;
+					case 2:
+						tileType = sprMngr->BLOOD3;
+						break;
+					case 3:
+						tileType = sprMngr->BLOOD4;
+						break;
+				}
 				break;
+
 			case 0x00333333:
 				tileType = sprMngr->SOLID;
 				break;
+
 			case 0x00777777:
-				tileType = sprMngr->CRACK;
+				switch (rand() % 4) {
+					case 0:
+						tileType = sprMngr->CRACK1;
+						break;
+					case 1:
+						tileType = sprMngr->CRACK2;
+						break;
+					case 2:
+						tileType = sprMngr->CRACK3;
+						break;
+					case 3:
+						tileType = sprMngr->CRACK4;
+						break;
+				}
 				break;
+
 			case 0x00112233:
 				tileType = sprMngr->RINGS;
 				break;
+
 			case 0x00332211:
 				tileType = sprMngr->LINES;
 				break;
 
 			default:
-				tileType = sprMngr->SPACE;
+				switch (rand() % 4) {
+					case 0:
+						tileType = sprMngr->SPACE1;
+						break;
+					case 1:
+						tileType = sprMngr->SPACE2;
+						break;
+					case 2:
+						tileType = sprMngr->SPACE3;
+						break;
+					case 3:
+						tileType = sprMngr->SPACE4;
+						break;
+				}
 				break;
 		}
 
@@ -88,7 +159,7 @@ bool TileMap::setTiles(SpriteMngr *sprMngr) {
 
 		x += 16 * static_cast<int>(TILE_SCALE);
 
-		if (x >= mWidth * TILE_SCALE - sprMngr->startingMap.getWidth()) {
+		if (x >= mWidth * TILE_SCALE) {
 			x = 0;
 			y += 16 * static_cast<int>(TILE_SCALE);
 		}

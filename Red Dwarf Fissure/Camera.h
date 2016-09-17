@@ -11,6 +11,7 @@ private:
 public:
 	SDL_Rect camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 
+	void constrain();
 	void update(int, int);
 
 	Camera(int w, int h, int s = 0) : LEVEL_WIDTH(w), LEVEL_HEIGHT(h), playerScale(32 * (s / 2)) {}
