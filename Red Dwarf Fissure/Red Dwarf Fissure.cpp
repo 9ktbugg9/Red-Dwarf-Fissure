@@ -32,7 +32,7 @@ int main(int args, char* argc[]) {
 
 
 		SDL_RenderClear(window._renderer);
-		SDL_SetRenderDrawColor(window._renderer, 30, 30, 30, 0xFF);
+		SDL_SetRenderDrawColor(window._renderer, 255, 255, 255, 0xFF);
 
 		cam.update(player.getX(), player.getY());
 		tileMap.render(&cam);

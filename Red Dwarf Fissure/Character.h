@@ -6,7 +6,8 @@
 
 class Character {
 private:
-	int _charFrame = 0, _walking = 0, _walkingTimer = 0, _blinkTimer = 1, _idleTimer = 1, _vel = 2, _dir = 0;
+	int _charFrame = 0, _walking = 0, _walkingTimer = 0, _blinkTimer = 1, _idleTimer = 1, _vel = SCALE, _dir = 0;
+	bool _pressed;
 	SDL_Rect _pos;
 	SpriteMngr *mSprMngr;
 	SDL_Rect* currentClip;

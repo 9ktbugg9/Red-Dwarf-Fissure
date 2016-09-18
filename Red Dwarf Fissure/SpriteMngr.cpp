@@ -10,22 +10,56 @@ SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :mRenderer(src), mWin
 
 	startingMap.loadFromFile("res/levels/spawn_level.png");
 
-	if (charSheet.loadFromFile("res/textures/sheets/char_32x32.png")) {
-		charClips[0][0].x = 0 * 32;
-		charClips[0][0].y = 0 * 32;
-		charClips[0][0].w = charClips[0][0].h = 32;
+	if (charSheet.loadFromFile("res/textures/sheets/char_64x64.png")) {
+		charClips[0][0][0][0].x = 0 * 64;
+		charClips[0][0][0][0].y = 0 * 64;
+		charClips[0][0][0][0].w = charClips[0][0][0][0].h = 64;
 
-		charClips[1][0].x = 0 * 32;
-		charClips[1][0].y = 1 * 32;
-		charClips[1][0].w = charClips[1][0].h = 32;
+		charClips[0][0][1][0].x = 0 * 64;
+		charClips[0][0][1][0].y = 1 * 64;
+		charClips[0][0][1][0].w = charClips[0][0][1][0].h = 64;
 
-		charClips[0][1].x = 1 * 32;
-		charClips[0][1].y = 0 * 32;
-		charClips[0][1].w = charClips[0][1].h = 32;
+		charClips[0][0][0][1].x = 1 * 64;
+		charClips[0][0][0][1].y = 0 * 64;
+		charClips[0][0][0][1].w = charClips[0][0][0][1].h = 64;
 
-		charClips[1][1].x = 1 * 32;
-		charClips[1][1].y = 1 * 32;
-		charClips[1][1].w = charClips[1][1].h = 32;
+		charClips[0][0][1][1].x = 1 * 64;
+		charClips[0][0][1][1].y = 1 * 64;
+		charClips[0][0][1][1].w = charClips[0][0][1][1].h = 64;
+
+		for(int k = 0; k < 2; k++)
+			for (int i = 0; i < 2; i++) {
+				charClips[1][k][0][i].x = (0 + (k * 4)) * 64;
+				charClips[1][k][0][i].y = (2 + (i * 3)) * 64;
+				charClips[1][k][0][i].w = charClips[1][k][0][i].h = 64;
+				charClips[2][k][0][i].x = (1 + (k * 4)) * 64;
+				charClips[2][k][0][i].y = (2 + (i * 3)) * 64;
+				charClips[2][k][0][i].w = charClips[2][k][0][i].h = 64;
+				charClips[3][k][0][i].x = (2 + (k * 4)) * 64;
+				charClips[3][k][0][i].y = (2 + (i * 3)) * 64;
+				charClips[3][k][0][i].w = charClips[3][k][0][i].h = 64;
+				charClips[4][k][0][i].x = (0 + (k * 4)) * 64;
+				charClips[4][k][0][i].y = (3 + (i * 3)) * 64;
+				charClips[4][k][0][i].w = charClips[4][k][0][i].h = 64;
+				charClips[5][k][0][i].x = (1 + (k * 4)) * 64;
+				charClips[5][k][0][i].y = (3 + (i * 3)) * 64;
+				charClips[5][k][0][i].w = charClips[5][k][0][i].h = 64;
+				charClips[6][k][0][i].x = (2 + (k * 4)) * 64;
+				charClips[6][k][0][i].y = (3 + (i * 3)) * 64;
+				charClips[6][k][0][i].w = charClips[6][k][0][i].h = 64;
+				charClips[7][k][0][i].x = (3 + (k * 4)) * 64;
+				charClips[7][k][0][i].y = (3 + (i * 3)) * 64;
+				charClips[7][k][0][i].w = charClips[7][k][0][i].h = 64;
+				charClips[8][k][0][i].x = (0 + (k * 4)) * 64;
+				charClips[8][k][0][i].y = (4 + (i * 3)) * 64;
+				charClips[8][k][0][i].w = charClips[8][k][0][i].h = 64;
+				charClips[9][k][0][i].x = (1 + (k * 4)) * 64;
+				charClips[9][k][0][i].y = (4 + (i * 3)) * 64;
+				charClips[9][k][0][i].w = charClips[9][k][0][i].h = 64;
+				charClips[10][k][0][i].x = (2 + (k * 4)) * 64;
+				charClips[10][k][0][i].y = (4 + (i * 3)) * 64;
+				charClips[10][k][0][i].w = charClips[10][k][0][i].h = 64;
+			}
 	}
 
 	if (tiles.loadFromFile("res/textures/sheets/tiles_16x16.png")) {
