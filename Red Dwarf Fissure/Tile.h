@@ -4,7 +4,7 @@
 
 class Tile {
 private:
-	SDL_Rect mPos;
+	SDL_Rect _pos;
 	int mType;
 
 	SpriteMngr *sprMngr;
@@ -12,7 +12,7 @@ public:
 
 	void render(SDL_Rect &cam);
 	int getType() { return mType; }
-	SDL_Rect getPos() { return mPos; }
+	SDL_Rect getPos() { return _pos; }
 
 
 	Tile(int, int, int, SpriteMngr *);

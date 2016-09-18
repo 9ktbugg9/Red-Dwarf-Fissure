@@ -5,9 +5,28 @@
 SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :mRenderer(src), mWindow(win) {
 
 	tiles.setSpecs(mRenderer, mWindow);
+	charSheet.setSpecs(mRenderer, mWindow);
 	startingMap.setSpecs(mRenderer, mWindow);
 
 	startingMap.loadFromFile("res/levels/spawn_level.png");
+
+	if (charSheet.loadFromFile("res/textures/sheets/char_32x32.png")) {
+		charClips[0][0].x = 0 * 32;
+		charClips[0][0].y = 0 * 32;
+		charClips[0][0].w = charClips[0][0].h = 32;
+
+		charClips[1][0].x = 0 * 32;
+		charClips[1][0].y = 1 * 32;
+		charClips[1][0].w = charClips[1][0].h = 32;
+
+		charClips[0][1].x = 1 * 32;
+		charClips[0][1].y = 0 * 32;
+		charClips[0][1].w = charClips[0][1].h = 32;
+
+		charClips[1][1].x = 1 * 32;
+		charClips[1][1].y = 1 * 32;
+		charClips[1][1].w = charClips[1][1].h = 32;
+	}
 
 	if (tiles.loadFromFile("res/textures/sheets/tiles_16x16.png")) {
 		tileClips[FLOOR1].x = 0 * 16;

@@ -10,12 +10,10 @@ void TileMap::render(Camera *cam) {
 		tileSet[i].render(cam->camera);
 }
 
-bool TileMap::setTiles(SpriteMngr *sprMngr) {
+void TileMap::setTiles(SpriteMngr *sprMngr) {
 	mWidth = sprMngr->startingMap.getWidth() * 16;
 	mHeight = sprMngr->startingMap.getHeight() * 16;
 	tileAmount = sprMngr->startingMap.getHeight() * sprMngr->startingMap.getWidth();
-	//std::cout << tileAmount;
-	bool tilesLoaded = true;
 	int x = 0, y = 0;
 
 	void* mPixels = nullptr;
@@ -165,7 +163,6 @@ bool TileMap::setTiles(SpriteMngr *sprMngr) {
 		}
 	}
 
-	return tilesLoaded;
 }
 
 TileMap::TileMap(std::string mapPath, SpriteMngr *sprMngr, SDL_Renderer *renderer, SDL_Window *window) : _path(mapPath), rend(renderer), wind(window) {

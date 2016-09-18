@@ -10,7 +10,7 @@ private:
 	std::vector<Tile> tileSet;
 
 	std::string _path;
-	bool setTiles(SpriteMngr *);
+	void setTiles(SpriteMngr *);
 	SDL_Renderer *rend;
 	SDL_Window *wind;
 public:

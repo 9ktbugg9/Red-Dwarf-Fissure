@@ -5,6 +5,7 @@
 #include "SpriteMngr.h"
 #include "AudioMngr.h"
 #include "TileMap.h"
+#include "Character.h"
 
 #define WINDOW_NAME "Red Dwarf Fissure"
 #define FPS 60
@@ -16,8 +17,8 @@ int main(int args, char* argc[]) {
 	//AudioMngr sounds;
 	SpriteMngr sprites(window._renderer, window._window);
 	TileMap tileMap("res/levels/spawn_level.png", &sprites, window._renderer, window._window);
-
 	Camera cam(tileMap.levelWidth() * static_cast<int>(TILE_SCALE), tileMap.levelHeight() * static_cast<int>(TILE_SCALE), static_cast<int>(SCALE));
+	Character player(&sprites);
 
 	Uint32 startingTick, fpsTick = SDL_GetTicks();
 	bool running = true;
@@ -29,21 +30,16 @@ int main(int args, char* argc[]) {
 
 		const Uint8 *CKS = SDL_GetKeyboardState(nullptr);
 
-		if (CKS[SDL_SCANCODE_W])
-			cam.camera.y -= 4;
-		if (CKS[SDL_SCANCODE_S])
-			cam.camera.y += 4;
-		if (CKS[SDL_SCANCODE_D])
-			cam.camera.x += 4;
-		if (CKS[SDL_SCANCODE_A])
-			cam.camera.x -= 4;
-
-		cam.constrain();
 
 		SDL_RenderClear(window._renderer);
 		SDL_SetRenderDrawColor(window._renderer, 30, 30, 30, 0xFF);
 
+		cam.update(player.getX(), player.getY());
 		tileMap.render(&cam);
+		player.pEvent(CKS, &tileMap);
+		player.update();
+		player.render(&cam);
+
 
 		SDL_RenderPresent(window._renderer);
 

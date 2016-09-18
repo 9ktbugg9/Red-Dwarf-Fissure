@@ -19,8 +19,10 @@ public:
 		SOLID, LINES, RINGS
 	};
 
-	CTexture startingMap;
+	CTexture charSheet;
+	SDL_Rect charClips[2][2];
 
+	CTexture startingMap;
 
 	SpriteMngr(SDL_Renderer *, SDL_Window *);
 	~SpriteMngr();
