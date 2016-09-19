@@ -15,7 +15,6 @@ void TileMap::setTiles(SpriteMngr *sprMngr) {
 	mHeight = sprMngr->startingMap.getHeight() * 16;
 	tileAmount = sprMngr->startingMap.getHeight() * sprMngr->startingMap.getWidth();
 	int x = 0, y = 0;
-
 	void* mPixels = nullptr;
 	int mPitch = 0;
 
@@ -44,7 +43,6 @@ void TileMap::setTiles(SpriteMngr *sprMngr) {
 	SDL_UnlockTexture(newTexture);
 	mPixels = NULL;
 
-
 	SDL_FreeSurface(formattedSurface);
 
 	SDL_FreeSurface(loadedSurface);
@@ -56,100 +54,47 @@ void TileMap::setTiles(SpriteMngr *sprMngr) {
 		switch (Uint32(pixelColors[i])) {
 			case 0x00000000:
 				switch (rand() % 4) {
-					case 0:
-						tileType = sprMngr->FLOOR1;
-						break;
-					case 1:
-						tileType = sprMngr->FLOOR2;
-						break;
-					case 2:
-						tileType = sprMngr->FLOOR3;
-						break;
-					case 3:
-						tileType = sprMngr->FLOOR4;
-						break;
-				}
-				break;
+					case 0: tileType = sprMngr->FLOOR1; break;
+					case 1: tileType = sprMngr->FLOOR2; break;
+					case 2: tileType = sprMngr->FLOOR3; break;
+					case 3: tileType = sprMngr->FLOOR4; break;
+				} break;
 
 			case 0x0000FF00:
 				switch (rand() % 4) {
-					case 0:
-						tileType = sprMngr->GOOPY1;
-						break;
-					case 1:
-						tileType = sprMngr->GOOPY2;
-						break;
-					case 2:
-						tileType = sprMngr->GOOPY3;
-						break;
-					case 3:
-						tileType = sprMngr->GOOPY4;
-						break;
-				}
-				break;
+					case 0: tileType = sprMngr->GOOPY1; break;
+					case 1: tileType = sprMngr->GOOPY2; break;
+					case 2: tileType = sprMngr->GOOPY3; break;
+					case 3: tileType = sprMngr->GOOPY4; break;
+				} break;
 
 			case 0x00FF0000:
 				switch (rand() % 4) {
-					case 0:
-						tileType = sprMngr->BLOOD1;
-						break;
-					case 1:
-						tileType = sprMngr->BLOOD2;
-						break;
-					case 2:
-						tileType = sprMngr->BLOOD3;
-						break;
-					case 3:
-						tileType = sprMngr->BLOOD4;
-						break;
-				}
-				break;
-
-			case 0x00333333:
-				tileType = sprMngr->SOLID;
-				break;
+					case 0: tileType = sprMngr->BLOOD1; break;
+					case 1: tileType = sprMngr->BLOOD2; break;
+					case 2: tileType = sprMngr->BLOOD3; break;
+					case 3: tileType = sprMngr->BLOOD4; break;
+				} break;
 
 			case 0x00777777:
 				switch (rand() % 4) {
-					case 0:
-						tileType = sprMngr->CRACK1;
-						break;
-					case 1:
-						tileType = sprMngr->CRACK2;
-						break;
-					case 2:
-						tileType = sprMngr->CRACK3;
-						break;
-					case 3:
-						tileType = sprMngr->CRACK4;
-						break;
-				}
-				break;
+					case 0: tileType = sprMngr->CRACK1; break;
+					case 1: tileType = sprMngr->CRACK2; break;
+					case 2: tileType = sprMngr->CRACK3; break;
+					case 3: tileType = sprMngr->CRACK4; break;
+				} break;
 
-			case 0x00112233:
-				tileType = sprMngr->RINGS;
-				break;
-
-			case 0x00332211:
-				tileType = sprMngr->LINES;
-				break;
+			case 0x00333333: tileType = sprMngr->SOLID; break;
+			case 0x00112233: tileType = sprMngr->RINGS; break;
+			case 0x00332211: tileType = sprMngr->LINES; break;
 
 			default:
 				switch (rand() % 4) {
-					case 0:
-						tileType = sprMngr->SPACE1;
-						break;
-					case 1:
-						tileType = sprMngr->SPACE2;
-						break;
-					case 2:
-						tileType = sprMngr->SPACE3;
-						break;
-					case 3:
-						tileType = sprMngr->SPACE4;
-						break;
-				}
-				break;
+					case 0: tileType = sprMngr->SPACE1; break;
+					case 1: tileType = sprMngr->SPACE2; break;
+					case 2: tileType = sprMngr->SPACE3; break;
+					case 3: tileType = sprMngr->SPACE4; break;
+				} break;
 		}
 
 		Tile tile(x, y, tileType, sprMngr);

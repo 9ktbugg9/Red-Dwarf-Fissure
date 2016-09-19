@@ -18,7 +18,7 @@ int main(int args, char* argc[]) {
 	SpriteMngr sprites(window._renderer, window._window);
 	TileMap tileMap("res/levels/spawn_level.png", &sprites, window._renderer, window._window);
 	Camera cam(tileMap.levelWidth() * static_cast<int>(TILE_SCALE), tileMap.levelHeight() * static_cast<int>(TILE_SCALE), static_cast<int>(SCALE));
-	Character player(&sprites);
+	Character player(&sprites, &tileMap);
 
 	Uint32 startingTick, fpsTick = SDL_GetTicks();
 	bool running = true;
@@ -36,7 +36,7 @@ int main(int args, char* argc[]) {
 
 		cam.update(player.getX(), player.getY());
 		tileMap.render(&cam);
-		player.pEvent(CKS, &tileMap);
+		player.pEvent(CKS);
 		player.update();
 		player.render(&cam);
 

@@ -2,8 +2,8 @@
 #include "Camera.h"
 
 void Camera::update(int x, int y) {
-	camera.x = static_cast<int>((x + playerScale) - (SCREEN_WIDTH / 2));
-	camera.y = static_cast<int>((y + playerScale) - (SCREEN_HEIGHT / 2));
+	camera.x = static_cast<int>((x + playerScale) - (SCREEN_WIDTH / 2) + 64 * (SCALE / 4));
+	camera.y = static_cast<int>((y + playerScale) - (SCREEN_HEIGHT / 2) + 64 * (SCALE / 4));
 	
 	constrain();
 }

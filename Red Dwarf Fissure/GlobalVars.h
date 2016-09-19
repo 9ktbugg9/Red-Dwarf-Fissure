@@ -4,5 +4,5 @@
 #define SCREEN_WIDTH 980
 #define SCREEN_HEIGHT SCREEN_WIDTH * 9 / 16
 
-#define SCALE 2
-#define TILE_SCALE 3
+#define SCALE 4
+#define TILE_SCALE 6

@@ -20,7 +20,7 @@ public:
 	};
 
 	CTexture charSheet;
-	SDL_Rect charClips[11][3][2][2];
+	SDL_Rect charClips[11][2][2][2];
 
 	CTexture startingMap;
 

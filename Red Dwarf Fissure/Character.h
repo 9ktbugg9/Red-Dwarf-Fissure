@@ -11,17 +11,19 @@ private:
 	SDL_Rect _pos;
 	SpriteMngr *mSprMngr;
 	SDL_Rect* currentClip;
+	TileMap * tileMap;
 
+	bool checkCollision(int, int);
 public:
 
 	void update();
-	void pEvent(const Uint8 *, TileMap *);
+	void pEvent(const Uint8 *);
 	void render(Camera *cam = nullptr);
 	int getX() { return _pos.x; }
 	int getY() { return _pos.y; }
 	int getHeight() { return _pos.h; }
 	int getWidth() { return _pos.w; }
 
-	Character(SpriteMngr *);
+	Character(SpriteMngr *, TileMap *);
 };
 
