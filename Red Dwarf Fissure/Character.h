@@ -7,7 +7,7 @@
 class Character {
 private:
 	int _charFrame = 0, _walking = 0, _walkingTimer = 0, _blinkTimer = 1, _idleTimer = 1;
-	int _vel = SCALE * 1.5, _dir = 0, _jump = 0, _fallingVel = 0, _jumpHeight = 0;
+	int _vel = SCALE * 1.5, _dir = 0, _jump = 0, _fallingVel = 0, _jumpHeight = 0, _fVTicks = 0;
 	bool _pressed = false, _jumped = false;
 	SpriteMngr *mSprMngr;
 	TileMap * tileMap;

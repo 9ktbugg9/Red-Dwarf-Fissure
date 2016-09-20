@@ -47,14 +47,28 @@ void Character::update() {
 
 	else {
 		_pos.y += _vel * 2 + (_fallingVel / 2);
+
+		std::cout << checkCollision(_pos) << "     ";
+
 		if (checkCollision(_pos)) {
-			_pos.y -= _vel * 2 + (_fallingVel / 2);
-			_fallingVel = 0;
+			_pos.y -= _vel * 2;
+			
+			//TODO: Make this more effective
+			while (checkCollision(_pos))
+				_pos.y--;
+			
+			_fallingVel = _fVTicks = 0;
 			_jumped = false;
+
+			while (checkCollision(_pos)) 
+				_pos.y--;
+
 		}
-		else
-			_fallingVel++;
+		else {
+				_fallingVel++;
+		}
 	}
+	std::cout << _pos.y << " - " << checkCollision(_pos) << std::endl;
 	_idleTimer++;
 	_blinkTimer++;
 }
@@ -92,7 +106,7 @@ void Character::pEvent(const Uint8* CKS) {
 
 	if (checkCollision(nPos)) _pressed = false;
 
-	else { _pos.x += addX; _pos.y += addY;}
+	else { _pos.x += addX; _pos.y += addY; }
 
 	if (!_pressed) {
 		_walking = 0;
