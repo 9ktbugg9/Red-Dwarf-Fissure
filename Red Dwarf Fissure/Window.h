@@ -26,7 +26,7 @@ public:
 	int getHeight() { return SCREEN_HEIGHT; }
 
 
-	Window(string winName) { init(winName);}
+	Window(string winName) { init(winName); }
 	~Window() { close(); }
 };
 

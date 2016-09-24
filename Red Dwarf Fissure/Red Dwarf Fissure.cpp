@@ -16,9 +16,9 @@ int main(int args, char* argc[]) {
 	Window window(WINDOW_NAME);
 	//AudioMngr sounds;
 	SpriteMngr sprites(window._renderer, window._window);
-	TileMap tileMap("res/levels/spawn_level.png", &sprites, window._renderer, window._window);
+	TileMap tileMap(sprites.startingMap.getPath(), &sprites, window._renderer, window._window);
 	Camera cam(tileMap.levelWidth() * static_cast<int>(TILE_SCALE), tileMap.levelHeight() * static_cast<int>(TILE_SCALE), static_cast<int>(SCALE));
-	Character player(&sprites, &tileMap);
+	Character player(SDL_Point{10, 250}, &sprites, &tileMap);
 
 	Uint32 startingTick, fpsTick = SDL_GetTicks();
 	bool running = true;
@@ -30,16 +30,13 @@ int main(int args, char* argc[]) {
 
 		const Uint8 *CKS = SDL_GetKeyboardState(nullptr);
 
-
 		SDL_RenderClear(window._renderer);
 		SDL_SetRenderDrawColor(window._renderer, 255, 255, 255, 0xFF);
 
-		cam.update(player.getX(), player.getY());
 		tileMap.render(&cam);
-		player.pEvent(CKS);
-		player.update();
+		player.update(CKS);
+		cam.update(SDL_Point{player.getX(), player.getY()});
 		player.render(&cam);
-
 
 		SDL_RenderPresent(window._renderer);
 

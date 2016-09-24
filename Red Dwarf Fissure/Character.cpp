@@ -3,7 +3,7 @@
 
 bool Character::checkCollision(SDL_Rect box) {
 	for (int i = 0; i < tileMap->getTileAmount(); ++i) {
-		if (tileMap->tileSet[i].getType() == mSprMngr->SOLID) {
+		if (tileMap->tileSet[i].getType() == _sprMngr->SOLID) {
 			if (tileCollision(box, tileMap->tileSet[i].getPos())) {
 				return true;
 			}
@@ -13,26 +13,28 @@ bool Character::checkCollision(SDL_Rect box) {
 }
 
 bool Character::tileCollision(SDL_Rect a, SDL_Rect b) {
-	if (a.y + (a.h - 6) * SCALE <= b.y) return false;
-	if (a.y + 8 * SCALE >= b.y + b.h * TILE_SCALE) return false;
-	if (a.x + (a.w - 8) * SCALE <= b.x) return false;
-	if (a.x + 8 * SCALE >= b.x + b.w * TILE_SCALE) return false;
+	if (a.y + (a.h - 6) * SCALE + 1 <= b.y) return false;
+	if (a.y + 8 * SCALE + 1 >= b.y + b.h * TILE_SCALE) return false;
+	if (a.x + (a.w - 8) * SCALE + 1 <= b.x) return false;
+	if (a.x + 8 * SCALE + 1 >= b.x + b.w * TILE_SCALE) return false;
 	return true;
 }
 
-void Character::update() {
+void Character::update(const Uint8 *CKS) {
+	if (CKS)
+		pEvent(CKS);
+
 	int bFr = _blinkTimer / 20;
 	int iFr = _idleTimer / 75;
 
 	if (bFr >= 2) { _blinkTimer = 0; bFr = 0; }
 	if (iFr >= 2) { _idleTimer = 0; iFr = 1; }
 
-	if (!_pressed) currentClip = &mSprMngr->charClips[_walking][0][iFr][bFr];
-	else currentClip = &mSprMngr->charClips[_walking][_dir][0][bFr];
+	if (!_pressed) currentClip = &_sprMngr->charClips[_walking][0][iFr][bFr];
+	else currentClip = &_sprMngr->charClips[_walking][_dir][0][bFr];
 
 	if (_jump != 0) {
-		_jump--;
-		_pos.y -= _jump;
+		_pos.y -= --_jump;
 
 		//TODO: Make this so it doesn't have to check collision twice
 		if (checkCollision(_pos)) {
@@ -48,30 +50,25 @@ void Character::update() {
 	else {
 		_pos.y += _vel * 2 + (_fallingVel / 2);
 
-		std::cout << checkCollision(_pos) << "     ";
-
 		if (checkCollision(_pos)) {
-			_pos.y -= _vel * 2;
-			
+			_pos.y -= _vel;
+
 			//TODO: Make this more effective
 			while (checkCollision(_pos))
 				_pos.y--;
-			
+
 			_fallingVel = _fVTicks = 0;
 			_jumped = false;
 
-			while (checkCollision(_pos)) 
-				_pos.y--;
 
 		}
 		else {
-				_fallingVel++;
+			_fallingVel++;
 		}
 	}
-	std::cout << _pos.y << " - " << checkCollision(_pos) << std::endl;
-	_idleTimer++;
-	_blinkTimer++;
+	_idleTimer++; _blinkTimer++;
 }
+
 
 void Character::pEvent(const Uint8* CKS) {
 	_pressed = false;
@@ -136,18 +133,23 @@ void Character::pEvent(const Uint8* CKS) {
 
 void Character::render(Camera *cam) {
 	if (cam)
-		mSprMngr->charSheet.render(_pos.x - cam->camera.x, _pos.y - cam->camera.y, currentClip, SCALE, SCALE, NULL, NULL, SDL_FLIP_NONE);
+		_sprMngr->charSheet.render(_pos.x - cam->camera.x, _pos.y - cam->camera.y, currentClip, SCALE, SCALE, NULL, NULL, SDL_FLIP_NONE);
 	else
-		mSprMngr->charSheet.render(_pos.x - 0 - _pos.w * static_cast<int>((SCALE / 2)), _pos.y - 0 - _pos.h * static_cast<int>((SCALE / 2)), currentClip, SCALE, SCALE, NULL, NULL, SDL_FLIP_NONE);
+		_sprMngr->charSheet.render(_pos.x - 0 - _pos.w * static_cast<int>((SCALE / 2)), _pos.y - 0 - _pos.h * static_cast<int>((SCALE / 2)), currentClip, SCALE, SCALE, NULL, NULL, SDL_FLIP_NONE);
 }
 
-Character::Character(SpriteMngr *src, TileMap *tSrc) : tileMap(tSrc) {
-	mSprMngr = src;
-	currentClip = &mSprMngr->charClips[0][0][0][0];
-	_pos.w = mSprMngr->charClips[0][0][0][0].w;
-	_pos.h = mSprMngr->charClips[0][0][0][0].h;
-	_pos.x = 10;
-	_pos.y = 150;
-	_jumpHeight = mSprMngr->tileClips[0].h;
+Character::Character(SDL_Point spawnPos, SpriteMngr *src, TileMap *tSrc) : tileMap(tSrc) {
+	_sprMngr = src;
+	currentClip = &_sprMngr->charClips[0][0][0][0];
+	_pos = *currentClip;
+	_pos.x = spawnPos.x;
+	_pos.y = spawnPos.y;
+
+	//TODO: Make this scale with the scale
+	//if (TILE_SCALE == 3)
+	_jumpHeight = _sprMngr->tileClips[0].h;
+//else if (TILE_SCALE > 3)
+//	_jumpHeight = mSprMngr->tileClips[0].h * (TILE_SCALE / 3) * 0.75;
+
 }
 

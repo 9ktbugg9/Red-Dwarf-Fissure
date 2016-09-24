@@ -2,11 +2,11 @@
 #include "SpriteMngr.h"
 
 
-SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :mRenderer(src), mWindow(win) {
+SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :_renderer(src), _window(win) {
 
-	tiles.setSpecs(mRenderer, mWindow);
-	charSheet.setSpecs(mRenderer, mWindow);
-	startingMap.setSpecs(mRenderer, mWindow);
+	tiles.setSpecs(_renderer, _window);
+	charSheet.setSpecs(_renderer, _window);
+	startingMap.setSpecs(_renderer, _window);
 
 	startingMap.loadFromFile("res/levels/spawn_level.png");
 
@@ -27,7 +27,7 @@ SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :mRenderer(src), mWin
 		charClips[0][0][1][1].y = 1 * 64;
 		charClips[0][0][1][1].w = charClips[0][0][1][1].h = 64;
 
-		for(int k = 0; k < 2; k++)
+		for (int k = 0; k < 2; k++)
 			for (int i = 0; i < 2; i++) {
 				charClips[1][k][0][i].x = (0 + (k * 4)) * 64;
 				charClips[1][k][0][i].y = (2 + (i * 3)) * 64;

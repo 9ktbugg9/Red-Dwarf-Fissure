@@ -11,8 +11,8 @@ void TileMap::render(Camera *cam) {
 }
 
 void TileMap::setTiles(SpriteMngr *sprMngr) {
-	mWidth = sprMngr->startingMap.getWidth() * 16;
-	mHeight = sprMngr->startingMap.getHeight() * 16;
+	_width = sprMngr->startingMap.getWidth() * 16;
+	_height = sprMngr->startingMap.getHeight() * 16;
 	tileAmount = sprMngr->startingMap.getHeight() * sprMngr->startingMap.getWidth();
 	int x = 0, y = 0;
 	void* mPixels = nullptr;
@@ -21,9 +21,9 @@ void TileMap::setTiles(SpriteMngr *sprMngr) {
 	SDL_Texture* newTexture = nullptr;
 	SDL_Surface* loadedSurface = IMG_Load(_path.c_str());
 
-	SDL_Surface* formattedSurface = SDL_ConvertSurface(loadedSurface, SDL_GetWindowSurface(wind)->format, NULL);
+	SDL_Surface* formattedSurface = SDL_ConvertSurface(loadedSurface, SDL_GetWindowSurface(_wind)->format, NULL);
 
-	newTexture = SDL_CreateTexture(rend, SDL_GetWindowPixelFormat(wind), SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h);
+	newTexture = SDL_CreateTexture(_rend, SDL_GetWindowPixelFormat(_wind), SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h);
 
 	SDL_LockTexture(newTexture, NULL, &mPixels, &mPitch);
 
@@ -102,7 +102,7 @@ void TileMap::setTiles(SpriteMngr *sprMngr) {
 
 		x += 16 * static_cast<int>(TILE_SCALE);
 
-		if (x >= mWidth * TILE_SCALE) {
+		if (x >= _width * TILE_SCALE) {
 			x = 0;
 			y += 16 * static_cast<int>(TILE_SCALE);
 		}
@@ -110,7 +110,7 @@ void TileMap::setTiles(SpriteMngr *sprMngr) {
 
 }
 
-TileMap::TileMap(std::string mapPath, SpriteMngr *sprMngr, SDL_Renderer *renderer, SDL_Window *window) : _path(mapPath), rend(renderer), wind(window) {
+TileMap::TileMap(std::string mapPath, SpriteMngr *sprMngr, SDL_Renderer *renderer, SDL_Window *window) : _path(mapPath), _rend(renderer), _wind(window) {
 	setTiles(sprMngr);
 }
 

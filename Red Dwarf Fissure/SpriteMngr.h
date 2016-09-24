@@ -4,8 +4,8 @@
 
 class SpriteMngr {
 private:
-	SDL_Renderer *mRenderer;
-	SDL_Window *mWindow;
+	SDL_Renderer *_renderer;
+	SDL_Window *_window;
 
 public:
 	CTexture tiles;

@@ -6,17 +6,17 @@
 
 class TileMap {
 private:
-	int tileAmount, mWidth, mHeight;
+	int tileAmount, _width, _height;
 
 	std::string _path;
 	void setTiles(SpriteMngr *);
-	SDL_Renderer *rend;
-	SDL_Window *wind;
+	SDL_Renderer *_rend;
+	SDL_Window *_wind;
 public:
 	std::vector<Tile> tileSet;
 
-	int levelWidth() { return mWidth; }
-	int levelHeight() { return mHeight; }
+	int levelWidth() { return _width; }
+	int levelHeight() { return _height; }
 	int getTileAmount() { return tileAmount; }
 
 	void render(Camera *);
