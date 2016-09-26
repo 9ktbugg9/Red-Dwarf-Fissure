@@ -2,27 +2,29 @@
 #include "Character.h"
 
 bool Character::checkCollision(SDL_Rect box) {
+	int l = _sprMngr->solidTiles.size();
+
 	for (int i = 0; i < tileMap->getTileAmount(); ++i) {
-		if (tileMap->tileSet[i].getType() == _sprMngr->SOLID) {
-			if (tileCollision(box, tileMap->tileSet[i].getPos())) {
-				return true;
-			}
-		}
+		bool solid = false;
+		for (int k = 0; k < l; k++)
+			if (tileMap->tileSet[i].getType() == _sprMngr->solidTiles[k]) solid = true;
+
+		if (solid)
+			if (tileCollision(box, tileMap->tileSet[i].getPos())) return true;
 	}
 	return false;
 }
 
 bool Character::tileCollision(SDL_Rect a, SDL_Rect b) {
 	if (a.y + (a.h - 6) * SCALE + 1 <= b.y) return false;
-	if (a.y + 8 * SCALE + 1 >= b.y + b.h * TILE_SCALE) return false;
+	if (a.y + 8 * SCALE + 11 >= b.y + b.h * TILE_SCALE) return false;
 	if (a.x + (a.w - 8) * SCALE + 1 <= b.x) return false;
 	if (a.x + 8 * SCALE + 1 >= b.x + b.w * TILE_SCALE) return false;
 	return true;
 }
 
 void Character::update(const Uint8 *CKS) {
-	if (CKS)
-		pEvent(CKS);
+	if (CKS) pEvent(CKS);
 
 	int bFr = _blinkTimer / 20;
 	int iFr = _idleTimer / 75;
@@ -59,12 +61,9 @@ void Character::update(const Uint8 *CKS) {
 
 			_fallingVel = _fVTicks = 0;
 			_jumped = false;
-
-
 		}
-		else {
+		else
 			_fallingVel++;
-		}
 	}
 	_idleTimer++; _blinkTimer++;
 }
@@ -146,10 +145,8 @@ Character::Character(SDL_Point spawnPos, SpriteMngr *src, TileMap *tSrc) : tileM
 	_pos.y = spawnPos.y;
 
 	//TODO: Make this scale with the scale
-	if (TILE_SCALE == 3)
-	_jumpHeight = _sprMngr->tileClips[0].h;
-else if (TILE_SCALE > 3)
-	_jumpHeight = _sprMngr->tileClips[0].h * (TILE_SCALE / 3) * 0.75;
+	if (TILE_SCALE == 3) _jumpHeight = _sprMngr->tileClips[0].h;
+	else if (TILE_SCALE > 3) _jumpHeight = _sprMngr->tileClips[0].h * (TILE_SCALE / 3) * 0.75;
 
 }
 

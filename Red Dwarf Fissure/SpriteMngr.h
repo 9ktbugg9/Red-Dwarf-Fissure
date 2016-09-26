@@ -1,5 +1,6 @@
 #pragma once
 #include "SDL.h"
+#include <vector>
 #include "CTexture.h"
 
 class SpriteMngr {
@@ -7,7 +8,9 @@ private:
 	SDL_Renderer *_renderer;
 	SDL_Window *_window;
 
+	void setSolids();
 public:
+
 	CTexture tiles;
 	SDL_Rect tileClips[4 * 5 + 3];
 	enum tileTypes {
@@ -18,6 +21,7 @@ public:
 		BLOOD1, BLOOD2, BLOOD3, BLOOD4,
 		SOLID, LINES, RINGS
 	};
+	std::vector<int> solidTiles;
 
 	CTexture charSheet;
 	SDL_Rect charClips[11][2][2][2];

@@ -83,9 +83,13 @@ SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :_renderer(src), _win
 		tileClips[RINGS].y = 2 * 16;
 		tileClips[RINGS].w = tileClips[RINGS].h = 16;
 	}
-
+	setSolids();
 }
 
+void SpriteMngr::setSolids() {
+	solidTiles.push_back(SOLID);
+	solidTiles.push_back(RINGS);
+}
 
 SpriteMngr::~SpriteMngr() {
 	startingMap.free();
