@@ -33,6 +33,11 @@ bool Window::init(string WINDOW_NAME) {
 					cout << "-SDL_Image Error- Reason: " << IMG_GetError() << endl;
 					success = false;
 				}
+				else {
+					SDL_Surface *icon = IMG_Load("res/textures/Icon.png");
+					SDL_SetWindowIcon(_window, icon);
+					SDL_FreeSurface(icon);
+				}
 			}
 		}
 	}
