@@ -114,6 +114,5 @@ TileMap::TileMap(std::string mapPath, SpriteMngr *sprMngr, SDL_Renderer *rendere
 	setTiles(sprMngr);
 }
 
-
 TileMap::~TileMap() {
 }

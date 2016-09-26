@@ -31,7 +31,7 @@ int main(int args, char* argc[]) {
 		const Uint8 *CKS = SDL_GetKeyboardState(nullptr);
 
 		SDL_RenderClear(window._renderer);
-		SDL_SetRenderDrawColor(window._renderer, 255, 255, 255, 0xFF);
+		SDL_SetRenderDrawColor(window._renderer, 0, 255, 255, 0xFF);
 
 		tileMap.render(&cam);
 		player.update(CKS);

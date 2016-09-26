@@ -146,10 +146,10 @@ Character::Character(SDL_Point spawnPos, SpriteMngr *src, TileMap *tSrc) : tileM
 	_pos.y = spawnPos.y;
 
 	//TODO: Make this scale with the scale
-	//if (TILE_SCALE == 3)
+	if (TILE_SCALE == 3)
 	_jumpHeight = _sprMngr->tileClips[0].h;
-//else if (TILE_SCALE > 3)
-//	_jumpHeight = mSprMngr->tileClips[0].h * (TILE_SCALE / 3) * 0.75;
+else if (TILE_SCALE > 3)
+	_jumpHeight = _sprMngr->tileClips[0].h * (TILE_SCALE / 3) * 0.75;
 
 }
 
