@@ -13,7 +13,7 @@ public:
 	void render(SDL_Rect &cam);
 	int getType() { return _type; }
 	SDL_Rect getPos() { return _pos; }
-
+	void replace(int type) { _type = type; }
 
 	Tile(int, int, int, SpriteMngr *);
 	~Tile();

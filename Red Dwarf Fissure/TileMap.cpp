@@ -87,6 +87,8 @@ void TileMap::setTiles(SpriteMngr *sprMngr) {
 			case 0x00333333: tileType = sprMngr->SOLID; break;
 			case 0x00112233: tileType = sprMngr->RINGS; break;
 			case 0x00332211: tileType = sprMngr->LINES; break;
+			case 0x00009900: tileType = sprMngr->GRASS; break;
+			case 0x00996600: tileType = sprMngr->DIRTY; break;
 
 			default:
 				switch (rand() % 4) {

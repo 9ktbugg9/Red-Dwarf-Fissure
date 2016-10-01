@@ -8,7 +8,7 @@ SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :_renderer(src), _win
 	charSheet.setSpecs(_renderer, _window);
 	startingMap.setSpecs(_renderer, _window);
 
-	startingMap.loadFromFile("res/levels/spawn_level.png");
+	startingMap.loadFromFile("res/levels/test_level_2.png");
 
 	if (charSheet.loadFromFile("res/textures/sheets/char_64x64.png")) {
 
@@ -82,6 +82,14 @@ SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :_renderer(src), _win
 		tileClips[RINGS].x = 5 * 16;
 		tileClips[RINGS].y = 2 * 16;
 		tileClips[RINGS].w = tileClips[RINGS].h = 16;
+
+		tileClips[GRASS].x = 0 * 16;
+		tileClips[GRASS].y = 4 * 16;
+		tileClips[GRASS].w = tileClips[GRASS].h = 16;
+
+		tileClips[DIRTY].x = 0 * 16;
+		tileClips[DIRTY].y = 5 * 16;
+		tileClips[DIRTY].w = tileClips[DIRTY].h = 16;
 	}
 	setSolids();
 }
@@ -89,6 +97,8 @@ SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :_renderer(src), _win
 void SpriteMngr::setSolids() {
 	solidTiles.push_back(SOLID);
 	solidTiles.push_back(RINGS);
+	solidTiles.push_back(GRASS);
+	solidTiles.push_back(DIRTY);
 }
 
 SpriteMngr::~SpriteMngr() {

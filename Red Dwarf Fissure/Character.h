@@ -11,22 +11,24 @@ private:
 	bool _pressed = false, _jumped = false;
 	SpriteMngr *_sprMngr;
 	TileMap *tileMap;
+	Camera *_cam;
 
 	SDL_Rect _pos;
 	SDL_Rect *currentClip;
 
 	void pEvent(const Uint8 *);
+	void pEvent(const Uint8, SDL_Point);
 	bool tileCollision(SDL_Rect a, SDL_Rect b);
 	bool checkCollision(SDL_Rect);
 public:
 
-	void update(const Uint8 *CKS = nullptr);
+	void update(const Uint8 *CKS = nullptr, const Uint8 = 0, SDL_Point = {0, 0});
 	void render(Camera *cam = nullptr);
 	int getX() { return _pos.x; }
 	int getY() { return _pos.y; }
 	int getHeight() { return _pos.h; }
 	int getWidth() { return _pos.w; }
 
-	Character(SDL_Point, SpriteMngr *, TileMap *);
+	Character(SDL_Point, SpriteMngr *, TileMap *, Camera *);
 };
 

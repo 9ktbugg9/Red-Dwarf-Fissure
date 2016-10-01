@@ -18,7 +18,7 @@ int main(int args, char* argc[]) {
 	SpriteMngr sprites(window._renderer, window._window);
 	TileMap tileMap(sprites.startingMap.getPath(), &sprites, window._renderer, window._window);
 	Camera cam(tileMap.levelWidth() * static_cast<int>(TILE_SCALE), tileMap.levelHeight() * static_cast<int>(TILE_SCALE), static_cast<int>(SCALE));
-	Character player(SDL_Point{10, 250}, &sprites, &tileMap);
+	Character player(SDL_Point{10, 250}, &sprites, &tileMap, &cam);
 
 	Uint32 startingTick, fpsTick = SDL_GetTicks();
 	bool running = true;
@@ -28,13 +28,16 @@ int main(int args, char* argc[]) {
 		if (!window.pEvents())
 			running = false;
 
+		int mouseX = 0, mouseY = 0;
 		const Uint8 *CKS = SDL_GetKeyboardState(nullptr);
+		const Uint16 CMS = SDL_GetMouseState(&mouseX, &mouseY);
+		SDL_Point mousePos{mouseX, mouseY};
 
 		SDL_RenderClear(window._renderer);
 		SDL_SetRenderDrawColor(window._renderer, 0, 255, 255, 0xFF);
 
 		tileMap.render(&cam);
-		player.update(CKS);
+		player.update(CKS, CMS, mousePos);
 		cam.update(SDL_Point{player.getX(), player.getY()});
 		player.render(&cam);
 

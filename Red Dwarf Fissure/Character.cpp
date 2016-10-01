@@ -7,7 +7,7 @@ bool Character::checkCollision(SDL_Rect box) {
 	for (int i = 0; i < tileMap->getTileAmount(); ++i) {
 		bool solid = false;
 		for (int k = 0; k < l; k++)
-			if (tileMap->tileSet[i].getType() == _sprMngr->solidTiles[k]) solid = true;
+			if (tileMap->tileSet[i].getType() == _sprMngr->solidTiles[k]) { solid = true; break; };
 
 		if (solid)
 			if (tileCollision(box, tileMap->tileSet[i].getPos())) return true;
@@ -23,8 +23,9 @@ bool Character::tileCollision(SDL_Rect a, SDL_Rect b) {
 	return true;
 }
 
-void Character::update(const Uint8 *CKS) {
+void Character::update(const Uint8 *CKS, const Uint8 CMS, SDL_Point mousePos) {
 	if (CKS) pEvent(CKS);
+	if (CMS) pEvent(CMS, mousePos);
 
 	int bFr = _blinkTimer / 20;
 	int iFr = _idleTimer / 75;
@@ -68,6 +69,12 @@ void Character::update(const Uint8 *CKS) {
 	_idleTimer++; _blinkTimer++;
 }
 
+void Character::pEvent(const Uint8 CMS, SDL_Point mousePos) {
+	mousePos.x += _cam->camera.x; mousePos.y += _cam->camera.y;
+	SDL_Point mouseTile{mousePos.x / (_sprMngr->tileClips[0].h * TILE_SCALE), mousePos.y / (_sprMngr->tileClips[0].h * TILE_SCALE)};
+	int point = ((mouseTile.y * (tileMap->levelWidth() / 16) + mouseTile.x));
+	tileMap->tileSet[point].replace(_sprMngr->SPACE1);
+}
 
 void Character::pEvent(const Uint8* CKS) {
 	_pressed = false;
@@ -137,7 +144,7 @@ void Character::render(Camera *cam) {
 		_sprMngr->charSheet.render(_pos.x - 0 - _pos.w * static_cast<int>((SCALE / 2)), _pos.y - 0 - _pos.h * static_cast<int>((SCALE / 2)), currentClip, SCALE, SCALE, NULL, NULL, SDL_FLIP_NONE);
 }
 
-Character::Character(SDL_Point spawnPos, SpriteMngr *src, TileMap *tSrc) : tileMap(tSrc) {
+Character::Character(SDL_Point spawnPos, SpriteMngr *src, TileMap *tSrc, Camera *cam) : tileMap(tSrc), _cam(cam) {
 	_sprMngr = src;
 	currentClip = &_sprMngr->charClips[0][0][0][0];
 	_pos = *currentClip;
