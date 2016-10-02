@@ -5,4 +5,4 @@
 #define SCREEN_HEIGHT SCREEN_WIDTH * 9 / 16
 
 #define SCALE 2 //* 2
-#define TILE_SCALE 3 //* 2
+#define TILE_SCALE 2 //* 2
