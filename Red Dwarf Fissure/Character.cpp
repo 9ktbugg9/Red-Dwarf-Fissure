@@ -18,7 +18,7 @@ bool Character::checkCollision(SDL_Rect box) {
 bool Character::tileCollision(SDL_Rect a, SDL_Rect b) {
 	if (a.y + (a.h - 6) * SCALE + 1 <= b.y) return false;
 	if (a.y + 8 * SCALE + 11 >= b.y + b.h * TILE_SCALE) return false;
-	if (a.x + (a.w - 8) * SCALE + 1 <= b.x) return false;
+	if (a.x + (a.w - 8) * SCALE - 1 <= b.x) return false;
 	if (a.x + 8 * SCALE + 1 >= b.x + b.w * TILE_SCALE) return false;
 	return true;
 }
@@ -39,8 +39,12 @@ void Character::update(const Uint8 *CKS, const Uint8 CMS, SDL_Point mousePos) {
 	if (_jump != 0) {
 		_pos.y -= --_jump;
 
-		//TODO: Make this so it doesn't have to check collision twice
+		//TODO: Make this so it doesn't have to check multiple times
 		if (checkCollision(_pos)) {
+			if (_jump < _jumpHeight - 1) {
+				if (CKS[SDL_SCANCODE_D]) _pos.x += 5;
+				if (CKS[SDL_SCANCODE_A]) _pos.x -= 5;
+			}
 			_pos.y += _jump;
 			_jump = 0;
 		}
