@@ -17,7 +17,7 @@ private:
 
 public:
 	bool loadFromFile(std::string);
-	void render(int x, int y, SDL_Rect *clip = nullptr, double scaleW = 1, double scaleH = 1, int sW = 0, int sH = 0, double angle = 0.0, SDL_Point* center = nullptr, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void render(int x, int y, SDL_Rect *clip = nullptr, double scaleW = 1, double scaleH = 1, int sW = 0, int sH = 0, double angle = 0.0, SDL_Point center = {0, 0}, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	void render(int, int, SDL_Rect *, SDL_Renderer *);
 	int getWidth() { return _width; }
 	int getHeight() { return _height; }

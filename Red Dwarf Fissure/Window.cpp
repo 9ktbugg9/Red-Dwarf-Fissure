@@ -43,23 +43,21 @@ bool Window::init(string WINDOW_NAME) {
 	return success;
 }
 bool Window::pEvents() {
-	bool running = true;
 	SDL_Event event;
 
 	SDL_PumpEvents();
 	SDL_FlushEvents(257, 261);
 	if (SDL_PollEvent(&event) != NULL) {
 		switch (event.type) {
-			case SDL_QUIT: running = false; break;
+			case SDL_QUIT: return false; break;
 
 			case SDL_KEYDOWN:
-				if (event.key.keysym.sym == SDLK_ESCAPE) running = false;
-				break;
+				if (event.key.keysym.sym == SDLK_ESCAPE) return false; break;
 
 			default: break;
 		}
 	}
-	return running;
+	return true;
 }
 
 SDL_Texture* Window::loadTexture(string path) {

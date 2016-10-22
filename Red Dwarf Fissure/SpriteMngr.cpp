@@ -7,6 +7,7 @@ SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :_renderer(src), _win
 	tiles.setSpecs(_renderer, _window);
 	charSheet.setSpecs(_renderer, _window);
 	startingMap.setSpecs(_renderer, _window);
+	effectSheet.setSpecs(_renderer, _window);
 
 	startingMap.loadFromFile("res/levels/test_level_2.png");
 
@@ -40,7 +41,6 @@ SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :_renderer(src), _win
 	}
 
 	if (tiles.loadFromFile("res/textures/sheets/tiles_16x16.png")) {
-
 		for (int i = 0; i < 4; i++) { // FLOOR 1 - 4
 			tileClips[i].x = 0 * 16;
 			tileClips[i].y = i * 16;
@@ -91,6 +91,25 @@ SpriteMngr::SpriteMngr(SDL_Renderer *src, SDL_Window *win) :_renderer(src), _win
 		tileClips[DIRTY].y = 5 * 16;
 		tileClips[DIRTY].w = tileClips[DIRTY].h = 16;
 	}
+
+	if (effectSheet.loadFromFile("res/textures/sheets/effects.png")) {
+
+		effectClips[LAZER1].x = 0 * 8;
+		effectClips[LAZER1].y = 0 * 8;
+		effectClips[LAZER1].w = 16 * 3;
+		effectClips[LAZER1].h = 8;
+
+		effectClips[LAZER2].x = 0 * 8;
+		effectClips[LAZER2].y = 1 * 8 + 2;
+		effectClips[LAZER2].w = 16 * 3;
+		effectClips[LAZER2].h = 8;
+
+		effectClips[LAZER3].x = 0 * 8;
+		effectClips[LAZER3].y = 2 * 8 + 4;
+		effectClips[LAZER3].w = 16 * 3;
+		effectClips[LAZER3].h = 8;
+	}
+
 	setSolids();
 }
 

@@ -34,7 +34,7 @@ void CTexture::free() {
 	}
 }
 
-void CTexture::render(int x, int y, SDL_Rect* clip, double scaleW, double scaleH, int sW, int sH, double angle, SDL_Point* center, SDL_RendererFlip flip) {
+void CTexture::render(int x, int y, SDL_Rect* clip, double scaleW, double scaleH, int sW, int sH, double angle, SDL_Point center, SDL_RendererFlip flip) {
 	SDL_Rect renderQuad = {x, y, _width, _height};
 	if (scaleW == 0)
 		scaleW = 1;
@@ -52,7 +52,7 @@ void CTexture::render(int x, int y, SDL_Rect* clip, double scaleW, double scaleH
 			renderQuad.h *= static_cast<int>(scaleH);
 		}
 	}
-	SDL_RenderCopyEx(_renderer, _texture, clip, &renderQuad, angle, center, flip);
+	SDL_RenderCopyEx(_renderer, _texture, clip, &renderQuad, angle, &center, flip);
 }
 
 void CTexture::render(int x, int y, SDL_Rect *pos, SDL_Renderer *rend) {

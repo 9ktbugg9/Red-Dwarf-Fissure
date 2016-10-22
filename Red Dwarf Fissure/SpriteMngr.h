@@ -12,7 +12,7 @@ private:
 public:
 
 	CTexture tiles;
-	SDL_Rect tileClips[4 * 5 + 3 + 3];
+	SDL_Rect tileClips[4 * 5 + 6];
 	enum tileTypes {
 		FLOOR1, FLOOR2, FLOOR3, FLOOR4,
 		CRACK1, CRACK2, CRACK3, CRACK4,
@@ -25,6 +25,12 @@ public:
 
 	CTexture charSheet;
 	SDL_Rect charClips[11][2][2][2];
+
+	CTexture effectSheet;
+	SDL_Rect effectClips[3];
+	enum effectTypes {
+		LAZER1, LAZER2, LAZER3
+	};
 
 	CTexture startingMap;
 
