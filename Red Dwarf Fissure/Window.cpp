@@ -27,7 +27,6 @@ bool Window::init(string WINDOW_NAME) {
 			}
 
 			else {
-
 				int imgFlags = IMG_INIT_PNG;
 				if (!(IMG_Init(imgFlags) & imgFlags)) {
 					cout << "-SDL_Image Error- Reason: " << IMG_GetError() << endl;
@@ -43,11 +42,12 @@ bool Window::init(string WINDOW_NAME) {
 	}
 	return success;
 }
-
 bool Window::pEvents() {
 	bool running = true;
 	SDL_Event event;
 
+	SDL_PumpEvents();
+	SDL_FlushEvents(257, 261);
 	if (SDL_PollEvent(&event) != NULL) {
 		switch (event.type) {
 			case SDL_QUIT: running = false; break;
