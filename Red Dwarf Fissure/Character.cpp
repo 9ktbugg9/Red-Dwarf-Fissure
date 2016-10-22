@@ -42,11 +42,23 @@ void Character::update(const Uint8 *CKS, const Uint8 CMS, SDL_Point mousePos) {
 		//TODO: Make this so it doesn't have to check multiple times
 		if (checkCollision(_pos)) {
 			if (_jump < _jumpHeight - 1) {
-				if (CKS[SDL_SCANCODE_D]) _pos.x += 5;
-				if (CKS[SDL_SCANCODE_A]) _pos.x -= 5;
+				while (checkCollision(_pos)) _pos.y++;
+				_jump = 0;
+				if (CKS[SDL_SCANCODE_D]) {
+					_pos.x += 5;
+					if (checkCollision(_pos))
+						_pos.x -= 5;
+				}
+				if (CKS[SDL_SCANCODE_A]) {
+					_pos.x -= 5;
+					if (checkCollision(_pos))
+						_pos.x += 5;
+				}
 			}
-			_pos.y += _jump;
-			_jump = 0;
+			else {
+				_pos.y += _jump;
+				_jump = 0;
+			}
 		}
 
 		_pos.y += _vel;
@@ -61,8 +73,7 @@ void Character::update(const Uint8 *CKS, const Uint8 CMS, SDL_Point mousePos) {
 			_pos.y -= _vel;
 
 			//TODO: Make this more effective
-			while (checkCollision(_pos))
-				_pos.y--;
+			while (checkCollision(_pos)) _pos.y--;
 
 			_fallingVel = _fVTicks = 0;
 			_jumped = false;
@@ -77,7 +88,7 @@ void Character::pEvent(const Uint8 CMS, SDL_Point mousePos) {
 	mousePos.x += _cam->camera.x; mousePos.y += _cam->camera.y;
 	SDL_Point mouseTile{mousePos.x / (_sprMngr->tileClips[0].h * TILE_SCALE), mousePos.y / (_sprMngr->tileClips[0].h * TILE_SCALE)};
 	int point = ((mouseTile.y * (tileMap->levelWidth() / 16) + mouseTile.x));
-	tileMap->tileSet[point].replace(_sprMngr->SPACE1);
+	tileMap->tileSet[point].replace(_sprMngr->EMPTY);
 }
 
 void Character::pEvent(const Uint8* CKS) {

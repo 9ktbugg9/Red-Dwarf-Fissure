@@ -5,7 +5,7 @@
 class Tile {
 private:
 	SDL_Rect _pos;
-	int _type;
+	int _type, _back;
 
 	SpriteMngr *sprMngr;
 public:
@@ -15,7 +15,7 @@ public:
 	SDL_Rect getPos() { return _pos; }
 	void replace(int type) { _type = type; }
 
-	Tile(int, int, int, SpriteMngr *);
+	Tile(int, int, int, int, SpriteMngr *);
 	~Tile();
 };
 

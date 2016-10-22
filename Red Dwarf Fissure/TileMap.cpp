@@ -49,7 +49,7 @@ void TileMap::setTiles(SpriteMngr *sprMngr) {
 
 
 	for (int i = 0; i < tileAmount; ++i) {
-		int tileType = 0;
+		int tileType = 0, backType = 0;
 		//std::cout << int(pixelColors[i]) << std::endl;
 		switch (Uint32(pixelColors[i])) {
 			case 0x00000000:
@@ -90,16 +90,17 @@ void TileMap::setTiles(SpriteMngr *sprMngr) {
 			case 0x00009900: tileType = sprMngr->GRASS; break;
 			case 0x00996600: tileType = sprMngr->DIRTY; break;
 
-			default:
-				switch (rand() % 4) {
-					case 0: tileType = sprMngr->SPACE1; break;
-					case 1: tileType = sprMngr->SPACE2; break;
-					case 2: tileType = sprMngr->SPACE3; break;
-					case 3: tileType = sprMngr->SPACE4; break;
-				} break;
+			default: tileType = sprMngr->EMPTY; break;
 		}
 
-		Tile tile(x, y, tileType, sprMngr);
+		switch (rand() % 4) {
+			case 0: backType = sprMngr->SPACE1; break;
+			case 1: backType = sprMngr->SPACE2; break;
+			case 2: backType = sprMngr->SPACE3; break;
+			case 3: backType = sprMngr->SPACE4; break;
+		}
+
+		Tile tile(x, y, tileType, backType, sprMngr);
 		tileSet.push_back(tile);
 
 		x += 16 * static_cast<int>(TILE_SCALE);
@@ -117,4 +118,5 @@ TileMap::TileMap(std::string mapPath, SpriteMngr *sprMngr, SDL_Renderer *rendere
 }
 
 TileMap::~TileMap() {
+	tileSet.clear();
 }
